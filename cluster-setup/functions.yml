@@ -1,0 +1,20 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+
+functions:
+  generate-2fa:
+    lang: python3-http
+    handler: ../functions/generate-2fa
+    image: leotepedelen/generate-2fa:latest
+
+  generate-password:
+    lang: python3-http
+    handler: ../functions/generate-password
+    image: leotepedelen/generate-password:latest
+
+  authenticate:
+    lang: python3-http
+    handler: ../functions/authenticate
+    image: leotepedelen/authenticate:latest

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenFaaS POC UI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    .container { max-width: 600px; margin: auto; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .card h2 { margin-top: 0; }
+    button { padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
+    button.primary { background-color: #007bff; color: #fff; }
+    img.qr { margin-top: 1rem; max-width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>OpenFaaS POC</h1>
+
+    <div class="card" id="gen-pwd-card">
+      <h2>Générer mot de passe</h2>
+      <input type="text" id="user-id-pwd" placeholder="User ID" />
+      <button class="primary" onclick="generatePassword()">Générer</button>
+      <p id="pwd-output"></p>
+      <img id="pwd-qr" class="qr" src="" alt="QR code mot de passe" />
+    </div>
+
+    <div class="card" id="gen-2fa-card">
+      <h2>Activer 2FA</h2>
+      <input type="text" id="user-id-2fa" placeholder="User ID" />
+      <button class="primary" onclick="generate2FA()">Activer</button>
+      <p id="2fa-output"></p>
+      <img id="2fa-qr" class="qr" src="" alt="QR code 2FA" />
+    </div>
+
+    <div class="card" id="auth-card">
+      <h2>Authentification</h2>
+      <input type="text" id="user-id-auth" placeholder="User ID" />
+      <input type="text" id="token-auth" placeholder="Token 2FA" />
+      <button class="primary" onclick="authenticate()">Vérifier</button>
+      <p id="auth-output"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
