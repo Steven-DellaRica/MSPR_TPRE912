@@ -33,7 +33,7 @@ helm upgrade openfaas openfaas/openfaas \
   --install \
   --namespace openfaas \
   --set basic_auth=false \
-  --values k8s/openfaas-helm-values.yaml 
+  --values ../k8s/openfaas-helm-values.yaml 
 
 echo "⌛ Attente du déploiement de metrics-server..."
 kubectl rollout status deployment/metrics-server -n kube-system
@@ -42,8 +42,8 @@ echo "⌛ Attente du déploiement de la gateway OpenFaaS..."
 kubectl rollout status -n openfaas deploy/gateway
 
 echo "▶️ 7. Déploiement de PostgreSQL..."
-kubectl apply -f k8s/secrets.yaml
-kubectl apply -f k8s/postgres-statefulset.yaml
+kubectl apply -f ../k8s/secrets.yaml
+kubectl apply -f ../k8s/postgres-statefulset.yaml
 
 echo "⌛ Attente de PostgreSQL..."
 kubectl rollout status -n openfaas statefulset/postgres
@@ -123,10 +123,10 @@ echo "📂 Contenu du dossier template :"
 ls -l template/
 
 echo "🚀 Build des fonctions"
-faas-cli build -f cluster-setup/functions.yml
+faas-cli build -f functions.yml
 
 echo "📤 Déploiement..."
-faas-cli deploy -f cluster-setup/functions.yml
+faas-cli deploy -f functions.yml
 
 echo "✅ Déploiement terminé."
 echo "➡️ Accède à la gateway OpenFaaS : http://127.0.0.1:8080"

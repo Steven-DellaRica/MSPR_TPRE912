@@ -5,16 +5,16 @@ provider:
 
 functions:
   generate-2fa:
-    lang: python3-http
-    handler: functions/generate-2fa 
-    image: leotepedelen/generate-2fa:latest
+    # lang: python3-http
+    # handler: ../functions/generate-2fa 
+    image: lingatsu/generate-2fa:latest
 
   generate-password:
-    lang: python3-http
-    handler: functions/generate-password
-    image: leotepedelen/generate-password:latest
+    # lang: python3-http
+    # handler: ../functions/generate-password
+    image: lingatsu/generate-password:latest
 
   authenticate:
-    lang: python3-http
-    handler: functions/authenticate
-    image: leotepedelen/authenticate:latest
+    # lang: python3-http
+    # handler: ../functions/authenticate
+    image: lingatsu/authenticate:latest
