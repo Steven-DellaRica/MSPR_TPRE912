@@ -1,13 +1,22 @@
+console.log('JS chargé !');
 const gatewayUrl = 'http://127.0.0.1:8080';
 
 async function generatePassword() {
   const userId = document.getElementById('user-id-pwd').value;
+    if (!userId) {
+    alert('Merci de saisir un User ID avant de générer le mot de passe.');
+    return;
+  }
+  console.log('Tentative de génération pour :', userId);
+  
   const res = await fetch(`${gatewayUrl}/function/generate-password`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id: userId })
   });
+  console.log('Réponse brute :', res);
   const data = await res.json();
+  console.log('Données reçues :', data);
   document.getElementById('pwd-output').textContent = data.password || data.error;
   if (data.qr_code) {
     document.getElementById('pwd-qr').src = `data:image/png;base64,${data.qr_code}`;
@@ -40,3 +49,8 @@ async function authenticate() {
   document.getElementById('auth-output').textContent =
     data.authenticated ? '✅ Authentifié' : '❌ Échec';
 }
+
+// Lier les boutons aux fonctions via des event listeners
+document.getElementById('btn-gen-pwd').addEventListener('click', generatePassword);
+document.getElementById('btn-gen-2fa').addEventListener('click', generate2FA);
+document.getElementById('btn-auth').addEventListener('click', authenticate);

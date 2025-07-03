@@ -6,15 +6,15 @@ provider:
 functions:
   generate-2fa:
     lang: python3-http
-    handler: ../functions/generate-2fa
+    handler: functions/generate-2fa 
     image: leotepedelen/generate-2fa:latest
 
   generate-password:
     lang: python3-http
-    handler: ../functions/generate-password
+    handler: functions/generate-password
     image: leotepedelen/generate-password:latest
 
   authenticate:
     lang: python3-http
-    handler: ../functions/authenticate
+    handler: functions/authenticate
     image: leotepedelen/authenticate:latest

@@ -21,7 +21,7 @@
     <div class="card" id="gen-pwd-card">
       <h2>Générer mot de passe</h2>
       <input type="text" id="user-id-pwd" placeholder="User ID" />
-      <button class="primary" onclick="generatePassword()">Générer</button>
+      <button class="primary" id="btn-gen-pwd">Générer</button>
       <p id="pwd-output"></p>
       <img id="pwd-qr" class="qr" src="" alt="QR code mot de passe" />
     </div>
@@ -29,7 +29,7 @@
     <div class="card" id="gen-2fa-card">
       <h2>Activer 2FA</h2>
       <input type="text" id="user-id-2fa" placeholder="User ID" />
-      <button class="primary" onclick="generate2FA()">Activer</button>
+      <button class="primary" id="btn-gen-2fa">Activer</button>
       <p id="2fa-output"></p>
       <img id="2fa-qr" class="qr" src="" alt="QR code 2FA" />
     </div>
@@ -38,7 +38,7 @@
       <h2>Authentification</h2>
       <input type="text" id="user-id-auth" placeholder="User ID" />
       <input type="text" id="token-auth" placeholder="Token 2FA" />
-      <button class="primary" onclick="authenticate()">Vérifier</button>
+      <button class="primary" id="btn-auth">Vérifier</button>
       <p id="auth-output"></p>
     </div>
   </div>
