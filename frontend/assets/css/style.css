@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+button {
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.qr-display {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.qr-display img {
+  max-width: 100%;
+  margin-top: 10px;
+}

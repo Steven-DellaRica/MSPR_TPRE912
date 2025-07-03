@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COFRAP Auth</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>COFRAP Auth System</h1>
+
+    <section>
+      <h2>Créer un utilisateur</h2>
+      <form id="createForm">
+        <input type="text" placeholder="Nom d'utilisateur" id="newUsername" required />
+        <button type="submit">Créer</button>
+      </form>
+      <div id="createResult" class="qr-display"></div>
+    </section>
+
+    <section>
+      <h2>Connexion</h2>
+      <form id="authForm">
+        <input type="text" placeholder="Nom d'utilisateur" id="authUsername" required />
+        <input type="password" placeholder="Mot de passe" id="authPassword" required />
+        <input type="text" placeholder="Code 2FA" id="auth2FA" required />
+        <button type="submit">Se connecter</button>
+      </form>
+      <div id="authResult" class="qr-display"></div>
+    </section>
+
+    <section>
+      <h2>Réinitialiser 2FA/Mot de passe</h2>
+      <form id="resetForm">
+        <input type="text" placeholder="Nom d'utilisateur" id="resetUsername" required />
+        <button type="submit">Réinitialiser</button>
+      </form>
+      <div id="resetResult" class="qr-display"></div>
+    </section>
+  </div>
+
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>
