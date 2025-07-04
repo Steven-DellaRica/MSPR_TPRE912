@@ -129,7 +129,29 @@ echo "📤 Déploiement..."
 faas-cli deploy -f functions.yml
 
 echo "✅ Déploiement terminé."
+
+echo "▶️ Déploiement de PostgreSQL..."
+kubectl apply -f ../k8s/postgres-statefulset.yaml
+
+echo "⏳ Attente de PostgreSQL..."
+kubectl rollout status -n openfaas statefulset/postgres
+
+echo "▶️ Initialisation de la base PostgreSQL via Job Kubernetes..."
+kubectl apply -f ../k8s/init-db-job.yaml
+
+echo "⏳ Attente de la fin de l'initialisation de la base..."
+kubectl wait --for=condition=complete --timeout=90s job/init-db -n openfaas
+
+echo "✅ PostgreSQL prêt et base initialisée."
+
+# (Optionnel) Nettoyage du Job pour garder le cluster propre
+kubectl delete job init-db -n openfaas --ignore-not-found
+
+echo "✅ Initialisation terminée. Utilisateur 'testuser' prêt pour les tests."
+
 echo "➡️ Accède à la gateway OpenFaaS : http://127.0.0.1:8080"
-echo "➡️ Lancer le frontend depuis 'frontend/' :"
-echo "cd frontend && python3 -m http.server 3000"
+echo "➡️ Lancer le frontend depuis 'frontend/' en faisant :"
+echo "cd frontend"
+echo "npm install"
+echo "npm run dev"
 echo "➡️ Puis accéder à : http://127.0.0.1:3000"

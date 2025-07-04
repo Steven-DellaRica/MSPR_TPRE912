@@ -10,9 +10,14 @@ functions:
     image: lingatsu/generate-2fa:latest
 
   generate-password:
-    # lang: python3-http
-    # handler: ../functions/generate-password
+    lang: python3-http
+    handler: ../functions/generate-password
     image: lingatsu/generate-password:latest
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: openfaas
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password    
 
   authenticate:
     # lang: python3-http
