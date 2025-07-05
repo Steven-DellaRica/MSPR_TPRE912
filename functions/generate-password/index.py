@@ -6,6 +6,10 @@ import psycopg2
 import qrcode
 import io
 import base64
+import sys
+import json
+print("DEBUG: index.py chargé", file=sys.stderr)
+
 
 # Environnement : variables DB
 DB_HOST = os.getenv('POSTGRES_HOST', 'postgres')
@@ -44,6 +48,7 @@ def generate_qr_code(data: str) -> str:
 
 
 def handle(event, context):
+    print("DEBUG: Fonction handle appelée", file=sys.stderr)
     req = request.get_json()
     user_id = req.get('user_id')
     if not user_id:
@@ -57,4 +62,10 @@ def handle(event, context):
 
     qr_data = f"otpauth://totp/OpenFaaS:{user_id}?secret={pwd}&issuer=OpenFaaS"
     qr_img = generate_qr_code(qr_data)
-    return {"password": pwd, "qr_code": qr_img}
+        return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "password": pwd,
+            "qr_code": qr_img
+        })
+    }

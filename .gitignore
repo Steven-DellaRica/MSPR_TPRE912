@@ -4,4 +4,4 @@ cluster-setup/setup.sh
 
 build
 template
-
+node_modules

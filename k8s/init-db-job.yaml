@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-db
+  namespace: openfaas
+spec:
+  template:
+    spec:
+      containers:
+      - name: init-db
+        image: postgres:15 
+        env:
+        - name: PGPASSWORD
+          value: "password"  
+        command: ["psql"]
+        args:
+          [
+            "-h", "postgres",  
+            "-U", "user",
+            "-d", "openfaas",
+            "-c",
+            "
+            CREATE TABLE IF NOT EXISTS totp_secrets (
+              user_id VARCHAR(255) NOT NULL,
+              secret VARCHAR(255) NOT NULL,
+              created_at TIMESTAMP NOT NULL DEFAULT NOW()
+            );
+
+            CREATE TABLE IF NOT EXISTS passwords (
+              user_id VARCHAR(255) NOT NULL,
+              password VARCHAR(255) NOT NULL,
+              created_at TIMESTAMP NOT NULL DEFAULT NOW()
+            );
+
+            INSERT INTO totp_secrets (user_id, secret) VALUES ('testuser', 'JBSWY3DPEHPK3PXP');
+            INSERT INTO passwords (user_id, password) VALUES ('testuser', 'SuperStrongPassword123!');
+            ",
+          ]
+      restartPolicy: Never
+  backoffLimit: 2

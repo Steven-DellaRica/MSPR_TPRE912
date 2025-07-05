@@ -1,5 +1,5 @@
 console.log('JS chargé !');
-const gatewayUrl = 'http://127.0.0.1:8080';
+// const gatewayUrl = '';
 
 async function generatePassword() {
   const userId = document.getElementById('user-id-pwd').value;
@@ -9,14 +9,27 @@ async function generatePassword() {
   }
   console.log('Tentative de génération pour :', userId);
   
-  const res = await fetch(`${gatewayUrl}/function/generate-password`, {
+  const res = await fetch(`/function/generate-password`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id: userId })
   });
-  console.log('Réponse brute :', res);
-  const data = await res.json();
+  // console.log('Réponse brute :', res);
+  // const data = await res.json();
+  // console.log('Données reçues :', data);
+  const rawText = await res.text();
+console.log('Réponse brute (texte) :', rawText);
+
+let data;
+try {
+  data = JSON.parse(rawText);
   console.log('Données reçues :', data);
+} catch (err) {
+  console.error('Erreur de parsing JSON :', err);
+  alert('Erreur lors de la lecture de la réponse du serveur.');
+  return;
+}
+
   document.getElementById('pwd-output').textContent = data.password || data.error;
   if (data.qr_code) {
     document.getElementById('pwd-qr').src = `data:image/png;base64,${data.qr_code}`;
@@ -25,7 +38,7 @@ async function generatePassword() {
 
 async function generate2FA() {
   const userId = document.getElementById('user-id-2fa').value;
-  const res = await fetch(`${gatewayUrl}/function/generate-2fa`, {
+  const res = await fetch(`/function/generate-2fa`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id: userId })
@@ -40,7 +53,7 @@ async function generate2FA() {
 async function authenticate() {
   const userId = document.getElementById('user-id-auth').value;
   const token = document.getElementById('token-auth').value;
-  const res = await fetch(`${gatewayUrl}/function/authenticate`, {
+  const res = await fetch(`/function/authenticate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id: userId, token: token })
