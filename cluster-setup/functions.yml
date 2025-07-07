@@ -5,8 +5,8 @@ provider:
 
 functions:
   generate-2fa:
-    # lang: python3-http
-    # handler: ../functions/generate-2fa 
+    lang: python3-http
+    handler: ../functions/generate-2fa 
     image: lingatsu/generate-2fa:latest
 
   generate-password:
@@ -20,6 +20,6 @@ functions:
       POSTGRES_PASSWORD: password    
 
   authenticate:
-    # lang: python3-http
-    # handler: ../functions/authenticate
+    lang: python3-http
+    handler: ../functions/authenticate
     image: lingatsu/authenticate:latest

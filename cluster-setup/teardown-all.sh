@@ -25,4 +25,7 @@ pkill -f "kubectl port-forward" || true
 echo "🛑 6. Arrêt et suppression du cluster Minikube..."
 minikube delete
 
+echo "🔌 7. Suppression des dossiers build et template"
+rm -rf ./build && rm -rf ./template
+
 echo "✅ Teardown complet terminé."
